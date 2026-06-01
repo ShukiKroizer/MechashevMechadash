@@ -1,0 +1,42 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}דשבורד | מחשב מחדש{% endblock %}
+
+{% block content %}
+<h1 class="admin-page-title">דשבורד</h1>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon">&#128187;</div>
+    <div class="stat-value">{{ total_new }}</div>
+    <div class="stat-label">מוצרים להשכרה</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">&#9855;</div>
+    <div class="stat-value">{{ total_refurb }}</div>
+    <div class="stat-label">מוצרים מחודשים</div>
+  </div>
+  <div class="stat-card stat-alert">
+    <div class="stat-icon">&#11088;</div>
+    <div class="stat-value">{{ pending_reviews }}</div>
+    <div class="stat-label">ביקורות ממתינות</div>
+  </div>
+</div>
+
+<div class="quick-actions">
+  <h2>פעולות מהירות</h2>
+  <div class="quick-actions-grid">
+    <a href="{{ url_for('products.add_product') }}" class="quick-btn">
+      <span>&#43;</span> הוסף מוצר
+    </a>
+    <a href="{{ url_for('reviews.admin_reviews') }}" class="quick-btn">
+      <span>&#11088;</span> נהל ביקורות
+    </a>
+    <a href="{{ url_for('settings.home_settings') }}" class="quick-btn">
+      <span>&#9881;</span> הגדרות בית
+    </a>
+    <a href="{{ url_for('home') }}" target="_blank" class="quick-btn">
+      <span>&#127760;</span> צפה באתר
+    </a>
+  </div>
+</div>
+{% endblock %}

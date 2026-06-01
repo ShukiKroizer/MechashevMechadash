@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}מוצרים מחודשים | מחשב מחדש{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">מוצרים מחודשים</h1>
+    <p class="page-subtitle">כל המחשבים המחודשים עוברים בדיקה יסודית ומגיעים עם אחריות</p>
+    {% if products %}
+      <div class="products-grid">
+        {% for product in products %}
+          {% set images = product.images() %}
+          <div class="product-card">
+            <div class="carousel refurb-badge-wrap" data-index="0">
+              <span class="badge-refurb">מחודש</span>
+              {% if images %}
+                <div class="carousel-track">
+                  {% for img in images %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ img) }}" alt="{{ product.name }}" class="carousel-slide" />
+                  {% endfor %}
+                </div>
+                {% if images|length > 1 %}
+                  <button class="carousel-btn carousel-prev" onclick="carouselPrev(this)">&#8249;</button>
+                  <button class="carousel-btn carousel-next" onclick="carouselNext(this)">&#8250;</button>
+                {% endif %}
+              {% else %}
+                <div class="no-image">אין תמונה</div>
+              {% endif %}
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <p class="product-desc">{{ product.description }}</p>
+              <div class="product-footer">
+                <span class="product-price">₪{{ "%.0f"|format(product.price) }}</span>
+                <a href="{{ url_for('contact') }}" class="btn btn-sm btn-primary">צור קשר</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <p>אין מוצרים מחודשים כרגע. בדקו שוב בקרוב!</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

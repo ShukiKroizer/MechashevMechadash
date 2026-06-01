@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}פאנל ניהול | מחשב מחדש{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="לוגו" onerror="this.src='{{ url_for('static', filename='images/logo.svg') }}'" />
+      <span>ניהול</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="{{ url_for('admin_dashboard') }}" class="{% if request.endpoint == 'admin_dashboard' %}active{% endif %}">
+        &#128200; דשבורד
+      </a>
+      <a href="{{ url_for('products.admin_products') }}" class="{% if request.endpoint in ['products.admin_products','products.add_product','products.edit_product'] %}active{% endif %}">
+        &#128187; מוצרים
+      </a>
+      <a href="{{ url_for('reviews.admin_reviews') }}" class="{% if request.endpoint in ['reviews.admin_reviews'] %}active{% endif %}">
+        &#11088; ביקורות
+      </a>
+      <a href="{{ url_for('settings.home_settings') }}" class="{% if request.endpoint == 'settings.home_settings' %}active{% endif %}">
+        &#9881; הגדרות בית
+      </a>
+      <hr />
+      <a href="{{ url_for('home') }}" target="_blank">&#127760; לאתר</a>
+      <a href="{{ url_for('auth.logout') }}" class="logout-link">&#128274; יציאה</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <button class="sidebar-toggle" id="sidebarToggle">&#9776;</button>
+      <span>שלום, {{ session.get('admin_username', 'מנהל') }}</span>
+      <a href="{{ url_for('auth.logout') }}" class="topbar-logout-btn">&#128274; יציאה</a>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="admin-content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

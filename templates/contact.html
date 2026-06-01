@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}יצירת קשר | מחשב מחדש{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">יצירת קשר</h1>
+
+    <div class="contact-layout">
+      <!-- Contact info -->
+      <div class="contact-info-card">
+        <h2>פרטי התקשרות</h2>
+        <div class="contact-detail">
+          <span class="contact-icon">&#128205;</span>
+          <span>{{ address if address else 'רחוב הרצל 1, תל אביב' }}</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-icon">&#128231;</span>
+          <a href="mailto:{{ email if email else 'info@mechashmechadash.co.il' }}">
+            {{ email if email else 'info@mechashmechadash.co.il' }}
+          </a>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-icon">&#128222;</span>
+          <a href="tel:{{ phone if phone else '03-1234567' }}">
+            {{ phone if phone else '03-1234567' }}
+          </a>
+        </div>
+      </div>
+
+      <!-- Review submission form -->
+      <div class="review-form-card" id="review-form">
+        <h2>שתפו את החוויה שלכם</h2>
+
+        {% if submitted %}
+          <div class="thank-you">
+            <div class="thank-you-icon">&#127881;</div>
+            <h3>תודה על הביקורת!</h3>
+            <p>הביקורת שלכם התקבלה ותפורסם לאחר אישור.</p>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline">שלחו ביקורת נוספת</a>
+          </div>
+        {% else %}
+          <form method="POST" action="{{ url_for('contact') }}#review-form" class="review-form">
+            <div class="form-group">
+              <label for="name">שם מלא *</label>
+              <input type="text" id="name" name="name" required placeholder="הכניסו שם מלא" />
+            </div>
+
+            <div class="form-group">
+              <label>דירוג *</label>
+              <div class="star-rating" id="starRating">
+                {% for i in range(1, 6) %}
+                  <span class="star-input" data-value="{{ i }}">&#9733;</span>
+                {% endfor %}
+              </div>
+              <input type="hidden" id="ratingInput" name="rating" value="5" />
+            </div>
+
+            <div class="form-group">
+              <label for="text">ביקורת *</label>
+              <textarea id="text" name="text" rows="5" required placeholder="ספרו על החוויה שלכם..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">שלחו ביקורת</button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

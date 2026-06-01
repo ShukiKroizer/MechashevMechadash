@@ -1,0 +1,63 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}ניהול ביקורות | מחשב מחדש{% endblock %}
+
+{% block content %}
+<h1 class="admin-page-title">ניהול ביקורות</h1>
+
+{% if reviews %}
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>שם</th>
+          <th>דירוג</th>
+          <th>ביקורת</th>
+          <th>תאריך</th>
+          <th>סטטוס</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for review in reviews %}
+          <tr class="{% if review.status == 'pending' %}row-pending{% elif review.status == 'approved' %}row-approved{% else %}row-rejected{% endif %}">
+            <td>{{ review.customer_name }}</td>
+            <td>
+              {% for i in range(1, 6) %}
+                <span class="star {% if i <= review.rating %}star-filled{% endif %}">&#9733;</span>
+              {% endfor %}
+            </td>
+            <td class="review-text-cell">{{ review.text }}</td>
+            <td>{{ review.created_at.strftime('%d/%m/%Y') }}</td>
+            <td>
+              <span class="status-badge status-{{ review.status }}">
+                {% if review.status == 'pending' %}ממתין
+                {% elif review.status == 'approved' %}מאושר
+                {% else %}נדחה{% endif %}
+              </span>
+            </td>
+            <td class="table-actions">
+              {% if review.status != 'approved' %}
+                <form method="POST" action="{{ url_for('reviews.approve_review', review_id=review.id) }}" style="display:inline">
+                  <button type="submit" class="btn btn-sm btn-success">אשר</button>
+                </form>
+              {% endif %}
+              {% if review.status != 'rejected' %}
+                <form method="POST" action="{{ url_for('reviews.reject_review', review_id=review.id) }}" style="display:inline">
+                  <button type="submit" class="btn btn-sm btn-warning">דחה</button>
+                </form>
+              {% endif %}
+              <form method="POST" action="{{ url_for('reviews.delete_review', review_id=review.id) }}" style="display:inline" onsubmit="return confirm('למחוק את הביקורת?')">
+                <button type="submit" class="btn btn-sm btn-danger">מחק</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <div class="empty-state">
+    <p>אין ביקורות עדיין.</p>
+  </div>
+{% endif %}
+{% endblock %}

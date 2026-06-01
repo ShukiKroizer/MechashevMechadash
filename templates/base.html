@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}מחשב מחדש{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<header class="navbar">
+  <div class="navbar-inner">
+    <a href="{{ url_for('home') }}" class="brand">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="לוגו מחשב מחדש" class="logo" onerror="this.src='{{ url_for('static', filename='images/logo.svg') }}'" />
+      <span class="brand-name">מחשב מחדש</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="תפריט">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">בית</a>
+      <a href="{{ url_for('rental') }}" class="{% if request.endpoint == 'rental' %}active{% endif %}">מוצרים להשכרה</a>
+      <a href="{{ url_for('refurbished_products') }}" class="{% if request.endpoint == 'refurbished_products' %}active{% endif %}">מוצרים מחודשים</a>
+      <a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}active{% endif %}">אודותינו</a>
+      <a href="{{ url_for('reviews') }}" class="{% if request.endpoint == 'reviews' %}active{% endif %}">ביקורות</a>
+      <a href="{{ url_for('contact') }}" class="{% if request.endpoint == 'contact' %}active{% endif %}">יצירת קשר</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Flash messages ── -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- ── Page content ── -->
+<main class="main-content">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>מחשב מחדש</h4>
+      <p>מכירת מחשבים חדשים ומחודשים במחירים אטרקטיביים</p>
+    </div>
+    <div class="footer-col">
+      <h4>צור קשר</h4>
+      <p>&#128205; רחוב הרצל 1, תל אביב</p>
+      <p>&#128231; info@mechashmechadash.co.il</p>
+      <p>&#128222; 03-1234567</p>
+    </div>
+    <div class="footer-col">
+      <h4>קישורים</h4>
+      <a href="{{ url_for('home') }}">בית</a>
+      <a href="{{ url_for('rental') }}">מוצרים להשכרה</a>
+      <a href="{{ url_for('refurbished_products') }}">מוצרים מחודשים</a>
+      <a href="{{ url_for('contact') }}">יצירת קשר</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 מחשב מחדש. כל הזכויות שמורות.</p>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
