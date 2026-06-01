@@ -12,9 +12,10 @@ def login():
 
     if request.method == "POST":
         username = request.form.get("username", "").strip()
-        password = request.form.get("password", "")
-        valid_username = os.environ.get("ADMIN_USERNAME", "admin")
-        valid_password = os.environ.get("ADMIN_PASSWORD", "admin123")
+        password = request.form.get("password", "").strip()
+        valid_username = os.environ.get("ADMIN_USERNAME", "admin").strip()
+        valid_password = os.environ.get("ADMIN_PASSWORD", "admin123").strip()
+        print(f"[login] submitted='{username}' expected='{valid_username}' | password_len={len(password)} expected_len={len(valid_password)} | match={'YES' if username == valid_username and password == valid_password else 'NO'}", flush=True)
         if username == valid_username and password == valid_password:
             session.permanent = False
             session["admin_logged_in"] = True
