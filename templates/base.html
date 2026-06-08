@@ -53,9 +53,9 @@
     </div>
     <div class="footer-col">
       <h4>צור קשר</h4>
-      <p>&#128205; רחוב הרצל 1, תל אביב</p>
-      <p>&#128231; info@mechashmechadash.co.il</p>
-      <p>&#128222; 03-1234567</p>
+      {% if footer_address %}<p>&#128205; {{ footer_address }}</p>{% endif %}
+      {% if footer_email %}<p>&#128231; {{ footer_email }}</p>{% endif %}
+      {% if footer_phone %}<p>&#128222; {{ footer_phone }}</p>{% endif %}
     </div>
     <div class="footer-col">
       <h4>קישורים</h4>

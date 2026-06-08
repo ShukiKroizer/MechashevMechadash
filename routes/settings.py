@@ -45,6 +45,10 @@ def home_settings():
         opening_hours = request.form.get("opening_hours", "")
         set_setting("opening_hours", opening_hours)
 
+        set_setting("address", request.form.get("address", "").strip())
+        set_setting("phone", request.form.get("phone", "").strip())
+        set_setting("email", request.form.get("email", "").strip())
+
         flash("ההגדרות עודכנו בהצלחה", "success")
         return redirect(url_for("settings.home_settings"))
 
@@ -54,4 +58,7 @@ def home_settings():
         "admin/home_settings.html",
         current_hero=current_hero,
         current_hours=current_hours,
+        current_address=get_setting("address"),
+        current_phone=get_setting("phone"),
+        current_email=get_setting("email"),
     )

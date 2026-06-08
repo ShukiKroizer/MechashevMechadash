@@ -37,6 +37,15 @@ application.register_blueprint(reviews_bp)
 application.register_blueprint(settings_bp)
 
 
+@application.context_processor
+def inject_footer_settings():
+    return {
+        "footer_address": get_setting("address"),
+        "footer_phone": get_setting("phone"),
+        "footer_email": get_setting("email"),
+    }
+
+
 # ── Admin dashboard (lives in main app to avoid circular imports) ──────────────
 
 @application.route("/admin/dashboard")
