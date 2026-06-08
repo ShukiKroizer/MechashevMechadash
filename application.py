@@ -128,9 +128,9 @@ def seed():
 
         # Store settings
         defaults = {
-            "address": "רחוב הרצל 1, תל אביב",
+            "address": "ביתר עילית",
             "email": "info@mechashmechadash.co.il",
-            "phone": "03-1234567",
+            "phone": "0527138797",
             "opening_hours": "ראשון-חמישי: 09:00 - 18:00\nשישי: 09:00 - 13:00\nשבת: סגור",
             "hero_image": "",
         }
