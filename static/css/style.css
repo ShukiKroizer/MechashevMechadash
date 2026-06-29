@@ -160,19 +160,12 @@ ul { list-style: none; }
 .hero {
   position: relative;
   width: 100%;
-  min-height: 400px;
+  height: 600px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--black) 0%, var(--dark-2) 60%, #3a3000 100%);
-  background-size: cover;
-  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
 }
 .hero-text-block { position: relative; z-index: 1; text-align: center; padding: 2rem; }
 .hero-text-block h1 { font-size: 2.8rem; color: #fff; margin-bottom: 0.75rem; line-height: 1.2; }
