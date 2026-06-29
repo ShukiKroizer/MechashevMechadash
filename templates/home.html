@@ -6,6 +6,7 @@
 {% if hero_image %}
   {% set hero_url = hero_image if hero_image.startswith('http') else url_for('static', filename='uploads/' ~ hero_image) %}
 {% endif %}
+<!-- DEBUG: hero_image={{ hero_image }}, hero_url={{ hero_url }} -->
 <section class="hero">
   {% if hero_image %}<div class="hero-bg" style="background-image: url('{{ hero_url }}');"></div>{% endif %}
   <div class="hero-text-block">
