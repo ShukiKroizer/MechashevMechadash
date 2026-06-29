@@ -12,7 +12,6 @@
       {% if current_hero %}
         <div class="current-image" style="margin-bottom:0.75rem">
           <img src="{{ current_hero if current_hero.startswith('http') else url_for('static', filename='uploads/' ~ current_hero) }}" alt="באנר נוכחי" style="max-width:400px;border-radius:8px" />
-          <p style="font-size:0.85rem;color:#666;margin-top:0.25rem">תמונה נוכחית: {{ current_hero }}</p>
         </div>
       {% endif %}
       <input type="file" name="hero_image" accept="image/*" />
