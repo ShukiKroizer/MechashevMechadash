@@ -160,7 +160,8 @@ ul { list-style: none; }
 .hero {
   position: relative;
   width: 100%;
-  min-height: 500px;
+  min-height: 600px;
+  height: 70vh;
   overflow: hidden;
   background: linear-gradient(135deg, var(--black) 0%, var(--dark-2) 60%, #3a3000 100%);
   display: flex;
