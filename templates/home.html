@@ -3,19 +3,21 @@
 
 {% block content %}
 <!-- ── Hero ── -->
-{% if hero_image %}
-  {% set hero_url = hero_image if hero_image.startswith('http') else url_for('static', filename='uploads/' ~ hero_image) %}
-{% endif %}
-<section class="hero"{% if hero_image %} style="background-image: url('{{ hero_url }}')"{% endif %}>
-  {% if hero_image %}<div class="hero-overlay"></div>{% endif %}
-  <div class="hero-text-block">
-    <h1>ברוכים הבאים למחשב מחדש</h1>
-    <p>מחשבים חדשים ומחודשים במחירים הטובים ביותר</p>
-    <div class="hero-actions">
-      <a href="{{ url_for('rental') }}" class="btn btn-primary">מוצרים להשכרה</a>
-      <a href="{{ url_for('refurbished_products') }}" class="btn btn-outline">מוצרים מחודשים</a>
+<section class="hero">
+  {% if hero_image %}
+    <img src="{{ hero_image if hero_image.startswith('http') else url_for('static', filename='uploads/' ~ hero_image) }}" alt="באנר ראשי" class="hero-img" />
+  {% else %}
+    <div class="hero-placeholder">
+      <div class="hero-text-block">
+        <h1>ברוכים הבאים למחשב מחדש</h1>
+        <p>מחשבים חדשים ומחודשים במחירים הטובים ביותר</p>
+        <div class="hero-actions">
+          <a href="{{ url_for('rental') }}" class="btn btn-primary">מוצרים להשכרה</a>
+          <a href="{{ url_for('refurbished_products') }}" class="btn btn-outline">מוצרים מחודשים</a>
+        </div>
+      </div>
     </div>
-  </div>
+  {% endif %}
 </section>
 
 <!-- ── Features strip ── -->
