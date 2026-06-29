@@ -35,8 +35,11 @@ def home_settings():
         hero_file = request.files.get("hero_image")
         if hero_file and hero_file.filename and allowed_file(hero_file.filename):
             filename = secure_filename(hero_file.filename)
-            url = upload_to_s3(hero_file, filename)
-            set_setting("hero_image", url)
+            try:
+                url = upload_to_s3(hero_file, filename)
+                set_setting("hero_image", url)
+            except RuntimeError as e:
+                flash(f"שגיאה בהעלאת תמונה: {e}", "error")
 
         # Opening hours (stored as plain text / newline-separated)
         opening_hours = request.form.get("opening_hours", "")

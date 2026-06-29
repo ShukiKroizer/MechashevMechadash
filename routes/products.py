@@ -17,7 +17,10 @@ def save_image(file_field):
     f = request.files.get(file_field)
     if f and f.filename and allowed_file(f.filename):
         filename = secure_filename(f.filename)
-        return upload_to_s3(f, filename)
+        try:
+            return upload_to_s3(f, filename)
+        except RuntimeError as e:
+            flash(f"שגיאה בהעלאת תמונה: {e}", "error")
     return None
 
 
