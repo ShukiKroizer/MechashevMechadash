@@ -6,7 +6,8 @@
 {% if hero_image %}
   {% set hero_url = hero_image if hero_image.startswith('http') else url_for('static', filename='uploads/' ~ hero_image) %}
 {% endif %}
-<section class="hero"{% if hero_image %} style="background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(212,175,55,0.3)), url('{{ hero_url }}') center/cover no-repeat;"{% endif %}>
+<section class="hero">
+  {% if hero_image %}<div class="hero-bg" style="background-image: url('{{ hero_url }}');"></div>{% endif %}
   <div class="hero-text-block">
     <h1>ברוכים הבאים למחשב מחדש</h1>
     <p>מחשבים חדשים ומחודשים במחירים הטובים ביותר</p>
