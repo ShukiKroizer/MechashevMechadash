@@ -7,7 +7,7 @@
   {% set hero_url = hero_image if hero_image.startswith('http') else url_for('static', filename='uploads/' ~ hero_image) %}
 {% endif %}
 {% if hero_image %}
-<section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('{{ hero_url }}'); background-size: cover; background-position: center;">
+<section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('{{ hero_url }}'); background-size: cover; background-position: center;">
 {% else %}
 <section class="hero">
 {% endif %}
