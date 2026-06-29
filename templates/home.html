@@ -5,7 +5,7 @@
 <!-- ── Hero ── -->
 <section class="hero">
   {% if hero_image %}
-    <img src="{{ url_for('static', filename='uploads/' ~ hero_image) }}" alt="באנר ראשי" class="hero-img" />
+    <img src="{{ hero_image if hero_image.startswith('http') else url_for('static', filename='uploads/' ~ hero_image) }}" alt="באנר ראשי" class="hero-img" />
   {% else %}
     <div class="hero-placeholder">
       <div class="hero-text-block">

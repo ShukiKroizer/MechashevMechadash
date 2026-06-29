@@ -1,8 +1,8 @@
-import os
-from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from models import db, StoreSetting
 from routes import login_required
+from utils.s3 import upload_to_s3
 
 settings_bp = Blueprint("settings", __name__)
 
@@ -32,14 +32,11 @@ def set_setting(key, value):
 @login_required
 def home_settings():
     if request.method == "POST":
-        # Hero image upload  # TODO: S3
         hero_file = request.files.get("hero_image")
         if hero_file and hero_file.filename and allowed_file(hero_file.filename):
             filename = secure_filename(hero_file.filename)
-            upload_dir = os.path.join(current_app.root_path, "static", "uploads")
-            os.makedirs(upload_dir, exist_ok=True)
-            hero_file.save(os.path.join(upload_dir, filename))
-            set_setting("hero_image", filename)
+            url = upload_to_s3(hero_file, filename)
+            set_setting("hero_image", url)
 
         # Opening hours (stored as plain text / newline-separated)
         opening_hours = request.form.get("opening_hours", "")

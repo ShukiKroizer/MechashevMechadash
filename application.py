@@ -9,6 +9,9 @@ _admin_user = os.environ.get("ADMIN_USERNAME", "admin")
 _admin_pass = os.environ.get("ADMIN_PASSWORD", "admin123")
 print(f"[startup] ADMIN_USERNAME={_admin_user!r}  ADMIN_PASSWORD={'*' * len(_admin_pass)} (len={len(_admin_pass)})")
 
+_aws_key = os.environ.get("AWS_ACCESS_KEY_ID", "")
+print(f"[startup] AWS_ACCESS_KEY_ID={'SET (' + _aws_key[:4] + '...)' if _aws_key else 'NOT SET'}")
+
 from models import db, Admin, Product, Review, StoreSetting
 from routes import login_required
 from routes.auth import auth_bp

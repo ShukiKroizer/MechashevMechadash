@@ -16,7 +16,7 @@
               {% if images %}
                 <div class="carousel-track">
                   {% for img in images %}
-                    <img src="{{ url_for('static', filename='uploads/' ~ img) }}" alt="{{ product.name }}" class="carousel-slide" />
+                    <img src="{{ img if img.startswith('http') else url_for('static', filename='uploads/' ~ img) }}" alt="{{ product.name }}" class="carousel-slide" />
                   {% endfor %}
                 </div>
                 {% if images|length > 1 %}

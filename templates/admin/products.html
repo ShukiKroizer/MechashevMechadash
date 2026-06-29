@@ -27,7 +27,7 @@
             <td>
               {% set imgs = p.images() %}
               {% if imgs %}
-                <img src="{{ url_for('static', filename='uploads/' ~ imgs[0]) }}" alt="{{ p.name }}" class="table-thumb" />
+                <img src="{{ imgs[0] if imgs[0].startswith('http') else url_for('static', filename='uploads/' ~ imgs[0]) }}" alt="{{ p.name }}" class="table-thumb" />
               {% else %}
                 <span class="no-thumb">—</span>
               {% endif %}
@@ -70,7 +70,7 @@
             <td>
               {% set imgs = p.images() %}
               {% if imgs %}
-                <img src="{{ url_for('static', filename='uploads/' ~ imgs[0]) }}" alt="{{ p.name }}" class="table-thumb" />
+                <img src="{{ imgs[0] if imgs[0].startswith('http') else url_for('static', filename='uploads/' ~ imgs[0]) }}" alt="{{ p.name }}" class="table-thumb" />
               {% else %}
                 <span class="no-thumb">—</span>
               {% endif %}

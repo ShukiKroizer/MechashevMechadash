@@ -1,8 +1,8 @@
-import os
-from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from models import db, Product
 from routes import login_required
+from utils.s3 import upload_to_s3
 
 products_bp = Blueprint("products", __name__)
 
@@ -14,14 +14,10 @@ def allowed_file(filename):
 
 
 def save_image(file_field):
-    """Save uploaded image to static/uploads and return filename. # TODO: S3"""
     f = request.files.get(file_field)
     if f and f.filename and allowed_file(f.filename):
         filename = secure_filename(f.filename)
-        upload_dir = os.path.join(current_app.root_path, "static", "uploads")
-        os.makedirs(upload_dir, exist_ok=True)
-        f.save(os.path.join(upload_dir, filename))
-        return filename
+        return upload_to_s3(f, filename)
     return None
 
 
