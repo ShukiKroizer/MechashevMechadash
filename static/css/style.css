@@ -160,34 +160,14 @@ ul { list-style: none; }
 .hero {
   position: relative;
   width: 100%;
-  min-height: 500px;
-  height: 65vh;
+  height: 600px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--black) 0%, var(--dark-2) 60%, #3a3000 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--black) 0%, var(--dark-2) 60%, #3a3000 100%);
-  overflow: hidden;
 }
-
-.hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.55;
-  z-index: 0;
-}
-
-.hero-text-block {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 2rem;
-}
+.hero-text-block { position: relative; z-index: 1; text-align: center; padding: 2rem; }
 .hero-text-block h1 { font-size: 2.8rem; color: #fff; margin-bottom: 0.75rem; line-height: 1.2; }
 .hero-text-block p  { font-size: 1.2rem; color: #ccc; margin-bottom: 2rem; }
 .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
