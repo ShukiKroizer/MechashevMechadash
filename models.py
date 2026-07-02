@@ -7,6 +7,7 @@ db = SQLAlchemy()
 
 class Admin(db.Model):
     __tablename__ = "admins"
+    __table_args__ = {"schema": "mechadash"}
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
@@ -20,6 +21,7 @@ class Admin(db.Model):
 
 class Product(db.Model):
     __tablename__ = "products"
+    __table_args__ = {"schema": "mechadash"}
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text, nullable=True)
@@ -36,6 +38,7 @@ class Product(db.Model):
 
 class Review(db.Model):
     __tablename__ = "reviews"
+    __table_args__ = {"schema": "mechadash"}
     id = db.Column(db.Integer, primary_key=True)
     customer_name = db.Column(db.String(100), nullable=False)
     rating = db.Column(db.Integer, nullable=False)  # 1-5
@@ -46,6 +49,7 @@ class Review(db.Model):
 
 class StoreSetting(db.Model):
     __tablename__ = "store_settings"
+    __table_args__ = {"schema": "mechadash"}
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(100), unique=True, nullable=False)
     value = db.Column(db.Text, nullable=True)

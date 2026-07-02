@@ -2,6 +2,7 @@ import os
 import click
 from dotenv import load_dotenv, find_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+from sqlalchemy import text
 
 load_dotenv(find_dotenv())
 
@@ -227,6 +228,9 @@ def update_admin():
 
 # ── DB init on startup ─────────────────────────────────────────────────────────
 with application.app_context():
+    with db.engine.connect() as conn:
+        conn.execute(text("CREATE SCHEMA IF NOT EXISTS mechadash"))
+        conn.commit()
     db.create_all()
 
 
