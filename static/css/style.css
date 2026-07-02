@@ -215,6 +215,7 @@ ul { list-style: none; }
   padding: 0.85rem 1.5rem;
   border-bottom: 1px solid var(--border);
   font-size: 1rem;
+  text-align: center;
 }
 .hours-row:last-child { border-bottom: none; }
 
