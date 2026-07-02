@@ -210,6 +210,7 @@ ul { list-style: none; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  text-align: center;
 }
 .hours-row {
   padding: 0.85rem 1.5rem;
