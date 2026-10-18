@@ -32,9 +32,9 @@ application.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16 MB upload limi
 application.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 application.config["SESSION_COOKIE_HTTPONLY"] = True
 
-# Set FORCE_HTTPS=true in the EB environment only after the HTTPS listener works.
-_force_https = os.environ.get("FORCE_HTTPS", "").lower() == "true"
-application.config["SESSION_COOKIE_SECURE"] = _force_https
+# CloudFront terminates HTTPS and redirects HTTP to HTTPS. Set FORCE_HTTPS=true in
+# the EB environment once the site is served through CloudFront.
+application.config["SESSION_COOKIE_SECURE"] = os.environ.get("FORCE_HTTPS", "").lower() == "true"
 
 db.init_app(application)
 
@@ -43,13 +43,6 @@ application.register_blueprint(auth_bp)
 application.register_blueprint(products_bp)
 application.register_blueprint(reviews_bp)
 application.register_blueprint(settings_bp)
-
-
-@application.before_request
-def redirect_to_https():
-    # The load balancer sets X-Forwarded-Proto; health checks don't, so they pass through.
-    if _force_https and request.headers.get("X-Forwarded-Proto") == "http":
-        return redirect(request.url.replace("http://", "https://", 1), code=301)
 
 
 @application.context_processor
