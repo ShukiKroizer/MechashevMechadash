@@ -660,6 +660,7 @@ ul { list-style: none; }
   .features-strip { flex-direction: column; }
   .feature-item { border-left: none; border-bottom: 1px solid #333; justify-content: center; }
   .footer-inner { grid-template-columns: 1fr; }
+  .footer-col { text-align: center; }
   .page-title { font-size: 1.5rem; }
 }
 
