@@ -45,6 +45,15 @@ application.register_blueprint(reviews_bp)
 application.register_blueprint(settings_bp)
 
 
+# Changes on every deploy, so browsers fetch the new stylesheet instead of a cached one.
+_css_version = int(os.path.getmtime(os.path.join(application.static_folder, "css", "style.css")))
+
+
+@application.context_processor
+def inject_css_version():
+    return {"css_version": _css_version}
+
+
 @application.context_processor
 def inject_footer_settings():
     return {
