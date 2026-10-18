@@ -24,7 +24,8 @@
   --transition:  0.2s ease;
 }
 
-html { font-size: 16px; }
+/* Dark canvas so overscroll and the area behind mobile browser toolbars match the navbar and footer. */
+html { font-size: 16px; background: var(--black); }
 
 body {
   font-family: 'Segoe UI', 'Arial', sans-serif;
