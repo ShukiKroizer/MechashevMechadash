@@ -658,7 +658,7 @@ ul { list-style: none; }
   .nav-links a { padding: 0.75rem 1.5rem; border-radius: 0; border-bottom: 1px solid #222; }
   .navbar { position: relative; }
   .features-strip { flex-direction: column; }
-  .feature-item { border-left: none; border-bottom: 1px solid #333; }
+  .feature-item { border-left: none; border-bottom: 1px solid #333; justify-content: center; }
   .footer-inner { grid-template-columns: 1fr; }
   .page-title { font-size: 1.5rem; }
 }
