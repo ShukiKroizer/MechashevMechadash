@@ -57,8 +57,8 @@
     <div class="footer-col">
       <h4>צור קשר</h4>
       {% if footer_address %}<p>&#128205; {{ footer_address }}</p>{% endif %}
-      {% if footer_email %}<p>&#128231; {{ footer_email }}</p>{% endif %}
-      {% if footer_phone %}<p>&#128222; {{ footer_phone }}</p>{% endif %}
+      {% if footer_email %}<p>&#128231; <a href="mailto:{{ footer_email }}" dir="ltr">{{ footer_email }}</a></p>{% endif %}
+      {% if footer_phone %}<p>&#128222; <a href="tel:{{ footer_phone }}" dir="ltr">{{ footer_phone }}</a></p>{% endif %}
     </div>
     <div class="footer-col">
       <h4>קישורים</h4>

@@ -32,6 +32,10 @@ application.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16 MB upload limi
 application.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 application.config["SESSION_COOKIE_HTTPONLY"] = True
 
+# CloudFront terminates HTTPS and redirects HTTP to HTTPS. Set FORCE_HTTPS=true in
+# the EB environment once the site is served through CloudFront.
+application.config["SESSION_COOKIE_SECURE"] = os.environ.get("FORCE_HTTPS", "").lower() == "true"
+
 db.init_app(application)
 
 # ── Blueprints ─────────────────────────────────────────────────────────────────
